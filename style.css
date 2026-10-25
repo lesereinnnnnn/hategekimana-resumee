@@ -1,7 +1,7 @@
 /* =========================================
    BASE STYLES
-   Element selectors: body, h1, h2, h3, a, ul
    ========================================= */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -11,11 +11,7 @@ body {
   line-height: 1.6;
 }
 
-h1 {
-  font-size: 2rem;
-  margin: 0.4rem 0;
-}
-
+h1 { font-size: 2rem; margin: 0.4rem 0; }
 h2 {
   font-size: 1.5rem;
   color: #1b3a2f;
@@ -23,58 +19,14 @@ h2 {
   padding-bottom: 0.25rem;
   margin-top: 1.5rem;
 }
-
-h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.2rem;
-  color: #2b2b2b;
-}
-
-ul {
-  padding-left: 1.4rem;
-}
-
-a {
-  color: #1b3a2f;
-}
-
-
-/* =========================================
-   NAVIGATION
-   Class selector: .site-nav
-   Descendant selector: .site-nav a
-   Hover and focus states for links
-   ========================================= */
-
-.site-nav {
-  background-color: #1b3a2f;
-  padding: 0.75rem 1rem;
-  display: block;
-}
-
-.site-nav a {
-  color: #ffffff;
-  text-decoration: none;
-  margin-right: 1.25rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-}
-
-.site-nav a:hover {
-  background-color: #2f5a48;
-}
-
-.site-nav a:focus {
-  outline: 3px solid #ffd27f;
-  outline-offset: 2px;
-}
+h3 { font-size: 1.1rem; margin: 0 0 0.2rem 0; }
+ul { padding-left: 1.4rem; }
+a { color: #1b3a2f; }
 
 
 /* =========================================
    HEADER
-   Class selector: .site-header
    ========================================= */
-
 .site-header {
   text-align: center;
   padding: 2rem 1rem 1.5rem 1rem;
@@ -92,31 +44,92 @@ a {
 
 
 /* =========================================
-   MAIN CONTENT / PORTFOLIO SECTIONS
-   Class selectors: .intro, .skills
-   ID selector: #contact
+   FLEXBOX AREA 1: NAVIGATION
    ========================================= */
+.site-nav {
+  display: flex;                  /* turns the nav into a flex row */
+  justify-content: center;        /* centers links horizontally */
+  align-items: center;            /* aligns links vertically */
+  flex-wrap: wrap;                /* links wrap instead of overflowing */
+  gap: 0.75rem;                   /* even spacing between links */
+  background-color: #1b3a2f;
+  padding: 0.75rem 1rem;
+}
 
+.site-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+}
+.site-nav a:hover { background-color: #2f5a48; }
+.site-nav a:focus { outline: 3px solid #ffd27f; outline-offset: 2px; }
+
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
 main {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 1rem 1.5rem 2rem 1.5rem;
   background-color: #ffffff;
 }
 
-section {
-  margin-bottom: 1.5rem;
-  padding: 0.75rem 0;
+section { margin-bottom: 1.5rem; padding: 0.75rem 0; }
+.intro { font-size: 1.05rem; }
+
+
+/* =========================================
+   FLEXBOX AREA 2: SKILLS / HOBBIES / CONTACT ROW
+   ========================================= */
+.skill-list,
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;                /* chips wrap onto new lines */
+  justify-content: flex-start;    /* start-aligned row */
+  align-items: center;
+  gap: 0.6rem;                    /* spacing between chips */
+  list-style: none;
+  padding-left: 0;
 }
 
-.intro {
-  font-size: 1.05rem;
+.skill-list li,
+.contact-links li {
+  background-color: #eef3f0;
+  border: 1px solid #c7d8ce;
+  border-radius: 20px;
+  padding: 0.35rem 0.9rem;
 }
 
-.skills ul li {
-  margin-bottom: 0.3rem;
+
+/* =========================================
+   CSS GRID: WORK EXPERIENCE CARD GALLERY
+   ========================================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+  grid-auto-rows: minmax(130px, auto);    /* rows at least 130px, grow if needed */
+  gap: 1rem;                              /* spacing between cards */
 }
 
+.card {
+  background-color: #f7f7f5;
+  border: 1px solid #d5ddd8;
+  border-left: 5px solid #1b3a2f;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.card-wide { grid-column: span 2; }       /* wide cards span 2 columns */
+
+.card .meta { font-size: 0.9rem; color: #555555; margin: 0 0 0.5rem 0; }
+.card p { margin: 0 0 0.4rem 0; }
+
+
+/* =========================================
+   CONTACT BOX
+   ========================================= */
 #contact {
   background-color: #eef3f0;
   padding: 1rem;
@@ -127,9 +140,7 @@ section {
 
 /* =========================================
    FOOTER
-   Class selector: .site-footer
    ========================================= */
-
 .site-footer {
   text-align: center;
   padding: 1rem;
@@ -137,4 +148,35 @@ section {
   color: #666666;
   background-color: #f0f0ee;
   border-top: 1px solid #dddddd;
+}
+
+
+/* =========================================
+   RESPONSIVE: TABLET (800px and below)
+   ========================================= */
+@media (max-width: 800px) {
+  main { padding: 1rem; }
+
+  .card-grid { grid-template-columns: repeat(2, 1fr); }  /* 3 -> 2 columns */
+  .card-wide { grid-column: span 1; }                    /* no spanning */
+}
+
+
+/* =========================================
+   RESPONSIVE: MOBILE (500px and below)
+   ========================================= */
+@media (max-width: 500px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  .site-header { padding: 1.25rem 0.75rem 1rem 0.75rem; }
+  .profile-photo { width: 110px; height: 110px; }
+
+  .site-nav {
+    flex-direction: column;       /* stack nav links vertically */
+    align-items: stretch;
+    text-align: center;
+  }
+  .site-nav a { padding: 0.6rem; }  /* bigger tap targets */
+
+  .card-grid { grid-template-columns: 1fr; }             /* 1 column */
 }
