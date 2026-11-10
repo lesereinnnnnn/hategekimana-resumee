@@ -13,4 +13,4 @@ A personal portfolio website built with semantic HTML, CSS Flexbox, CSS Grid, an
 - `images/profile.jpg` - profile photo
 
 ## Live website
-GitHub Pages: https://lesereinnnnn.github.io/Hategekimana-resume/
+GitHub Pages: https://lesereinnnnnn.github.io/hategekimana-resumee/
